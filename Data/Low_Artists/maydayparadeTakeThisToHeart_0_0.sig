@@ -1,0 +1,241 @@
+1
+Data\Low_Artists\maydayparadeTakeThisToHeart.txt
+352.000000 Total number of words
+0.286932 Word diversity
+182.342985 FFT mean
+93.607377 FFT median
+209.743102 FFT stddev
+0.000000 FFT min
+703.606671 FFT max
+0.997159 FFT histogram bin 1
+0.000000 FFT histogram bin 2
+0.000000 FFT histogram bin 3
+0.000000 FFT histogram bin 4
+0.002841 FFT histogram bin 5
+3.522727 Word length mean
+0.150568 Words of length 1
+0.161932 Words of length 2
+0.167614 Words of length 3
+0.292614 Words of length 4
+0.073864 Words of length 5
+0.082386 Words of length 6
+0.059659 Words of length 7
+0.008523 Words of length 8
+0.002841 Words of length 9
+0.000000 Words of length 10
+0.000000 Words of length 11
+0.000000 Words of length 12
+0.000000 Words of length 13
+0.000000 Words of length 14
+0.000000 Words of length 15
+0.000000 Words of length 16
+0.062338 Word homogeneity mean
+0.029386 Word homogeneity StdDev
+0.114286 Word homogeneity maximum
+0.295455 Word homoganity hist bin 0
+0.000000 Word homoganity hist bin 1
+0.386364 Word homoganity hist bin 2
+0.000000 Word homoganity hist bin 3
+0.000000 Word homoganity hist bin 4
+0.159091 Word homoganity hist bin 5
+0.000000 Word homoganity hist bin 6
+0.159091 Word homoganity hist bin 7
+0.170455 Punctuation characters ratio
+0.000000 Frequency of "."
+0.034091 Frequency of ","
+0.000000 Frequency of "-"
+0.096591 Frequency of "'"
+0.000000 Frequency of "+"
+0.000000 Frequency of "\"
+0.000000 Frequency of "/"
+0.000000 Frequency of "!"
+0.000000 Frequency of "?"
+0.039773 Frequency of "("
+0.000000 Frequency of "="
+0.000000 Frequency of "*"
+0.000000 Frequency of "&"
+0.000000 Frequency of "{"
+0.000000 Frequency of "["
+0.000000 Frequency of ";"
+0.000000 Frequency of ":"
+0.042619 Use of upper case
+0.000000 Upper case word mean
+0.000000 Quotations number
+0.000000 Quotation length mean
+0.000000 Quotation length stddev
+0.000000 Quotation part of the text
+0.000000 Emoticon :) / :-)
+0.000000 Emoticon ;) / ;-)
+0.000000 Emoticon :( / :-(
+7.777778 Sentence length mean
+2.723469 Sentence length stddev
+35.977778 Sentence length character mean
+0.088889 Sentence length hist bin 0
+0.155556 Sentence length hist bin 1
+0.222222 Sentence length hist bin 2
+0.177778 Sentence length hist bin 3
+0.111111 Sentence length hist bin 4
+0.155556 Sentence length hist bin 5
+0.000000 Sentence length hist bin 6
+0.088889 Sentence length hist bin 7
+-0.949066 Automated readability index
+1.107922 Coleman–Liau index
+-1.000000 Emotion circumplex
+0.000000 Emotion circumplex mean
+0.000000 Emotion circumplex stddev
+0.000000 Emotion circumplex hist bin 0
+0.000000 Emotion circumplex hist bin 1
+0.000000 Emotion circumplex hist bin 2
+0.000000 Emotion circumplex hist bin 3
+0.000000 Emotion circumplex hist bin 4
+0.000000 Emotion circumplex hist bin 5
+0.000000 Emotion circumplex hist bin 6
+0.000000 Emotion circumplex hist bin 7
+0.079545 Word repetition span 3
+0.164773 Word repetition span 7
+0.207386 Word repetition span 11
+0.372159 Word repetition span 17
+0.002841 Use of numbers
+0.009901 Number diversity
+1.000000 Mean of numbers
+0.034091 positive words frequency
+0.000000 positive words mean
+0.000000 positive words stddev
+0.000000 positive words min
+0.000000 positive words max
+0.000000 positive words dif
+0.000000 positive words hist bin 0
+0.000000 positive words hist bin 1
+0.000000 positive words hist bin 2
+0.000000 positive words hist bin 3
+0.000000 positive words hist bin 4
+0.000000 positive words hist bin 5
+0.000000 positive words hist bin 6
+0.000000 positive words hist bin 7
+0.002841 negative words frequency
+0.000000 negative words mean
+0.000000 negative words stddev
+0.000000 negative words min
+0.000000 negative words max
+0.000000 negative words dif
+0.000000 negative words hist bin 0
+0.000000 negative words hist bin 1
+0.000000 negative words hist bin 2
+0.000000 negative words hist bin 3
+0.000000 negative words hist bin 4
+0.000000 negative words hist bin 5
+0.000000 negative words hist bin 6
+0.000000 negative words hist bin 7
+0.017045 hapiness words frequency
+0.000000 hapiness words mean
+0.000000 hapiness words stddev
+0.000000 hapiness words min
+0.000000 hapiness words max
+0.000000 hapiness words dif
+0.000000 hapiness words hist bin 0
+0.000000 hapiness words hist bin 1
+0.000000 hapiness words hist bin 2
+0.000000 hapiness words hist bin 3
+0.000000 hapiness words hist bin 4
+0.000000 hapiness words hist bin 5
+0.000000 hapiness words hist bin 6
+0.000000 hapiness words hist bin 7
+0.005682 happy words frequency
+0.088068 adjectives frequency
+0.036932 adverbs frequency
+0.048295 prepositions frequency
+0.153409 pronouns frequency
+0.088068 verbs frequency
+0.056818 verbs that are nouns frequency
+0.090909 sport frequency
+0.017045 math frequency
+0.000000 science frequency
+0.000000 science fields frequency
+0.000000 US states frequency
+0.017045 shapes frequency
+0.002841 school frequency
+0.000000 lanuages frequency
+0.000000 elections frequency
+0.002841 food frequency
+0.000000 money frequency
+0.019886 driving frequency
+0.051136 military frequency
+0.017045 law frequency
+0.017045 countries frequency
+0.002841 emotions frequency
+0.005682 dance frequency
+0.011364 boats frequency
+0.000000 energy frequency
+0.042614 familiy frequency
+0.011364 musical instruments frequency
+0.017045 music frequency
+0.011364 land forms frequency
+0.011364 art frequency
+0.019886 astronomy frequency
+0.000000 colors frequency
+0.008523 animals frequency
+0.000000 dogs frequency
+0.000000 cats frequency
+0.000000 fish frequency
+0.000000 birds frequency
+0.000000 reptiles frequency
+0.002841 insects frequency
+0.000000 cars frequency
+0.002841 car parts frequency
+0.011364 beach frequency
+0.000000 fall frequency
+0.000000 spring frequency
+0.000000 summer frequency
+0.014205 winter frequency
+0.025568 weather frequency
+0.031250 vacation frequency
+0.019886 medical frequency
+0.008523 body frequency
+0.000000 farm frequency
+0.000000 trees frequency
+0.002841 transportation frequency
+0.062500 time frequency
+0.028409 clothing frequency
+0.000000 shoes frequency
+0.000000 hats frequency
+0.053977 buildings frequency
+0.045455 public buildings frequency
+0.008523 birthday frequency
+0.008523 monsters frequency
+0.002841 office frequency
+0.011364 tools frequency
+0.000000 camping frequency
+0.002841 fair frequency
+0.000000 castles and kings and queens frequency
+0.014205 circus frequency
+0.045455 computer frequency
+0.025568 cooking frequency
+0.025568 kitchen frequency
+0.000000 fruits frequency
+0.005682 geography frequency
+0.005682 furnitures frequency
+0.000000 occupation frequency
+0.011364 leaders frequency
+0.042614 house frequency
+0.039773 restaurants frequency
+0.005682 roads frequency
+0.002841 rocks and minerals frequency
+0.025568 weapons frequency
+0.014205 measurements frequency
+0.014205 containers frequency
+0.000000 acquaintances frequency
+0.000000 yard frequency
+0.000000 flowers frequency
+0.039773 acronyms frequency
+0.136364 self frequency
+0.000000 female frequency
+0.000000 male frequency
+0.230114 Soundex diversity
+0.066429 Soundex homogeneity mean
+0.035218 Soundex homogeneity StdDev
+0.171429 Soundex homogeneity maximum
+0.300000 Soundex homoganity hist bin 0
+0.350000 Soundex homoganity hist bin 1
+0.125000 Soundex homoganity hist bin 2
+0.200000 Soundex homoganity hist bin 3
+0.025000 Soundex homoganity hist bin 4
