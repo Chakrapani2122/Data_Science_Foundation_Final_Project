@@ -1,4 +1,5 @@
 used values
 i: 1000
-j: 140
+j: 141
 n: 10
+
