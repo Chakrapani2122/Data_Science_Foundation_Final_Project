@@ -1,0 +1,196 @@
+0.05
+                       Low_Artists     Top_Artists
+     Low_Artists              89              52
+     Top_Artists              34             107
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.59546
+     Top_Artists         0.63092         1.00000
+
+
+Accuracy: 0.695035
+
+
+
+Average accuracy (10 splits): 0.710993
+
+0.1
+
+                       Low_Artists     Top_Artists
+     Low_Artists              84              57
+     Top_Artists              27             114
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.75941
+     Top_Artists         0.65675         1.00000
+
+
+Accuracy: 0.702128
+
+
+
+Average accuracy (10 splits): 0.713830
+
+
+0.2
+
+                       Low_Artists     Top_Artists
+     Low_Artists              96              45
+     Top_Artists              27             114
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.69592
+     Top_Artists         0.75021         1.00000
+
+
+Accuracy: 0.744681
+
+
+
+Average accuracy (10 splits): 0.726596
+
+0.3
+
+                       Low_Artists     Top_Artists
+     Low_Artists              84              57
+     Top_Artists              21             120
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.75348
+     Top_Artists         0.68883         1.00000
+
+
+Accuracy: 0.723404
+
+
+
+Average accuracy (10 splits): 0.726241
+
+0.4
+
+                       Low_Artists     Top_Artists
+     Low_Artists              80              61
+     Top_Artists              27             114
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.78738
+     Top_Artists         0.74148         1.00000
+
+
+Accuracy: 0.687943
+
+
+
+Average accuracy (10 splits): 0.727660
+
+0.5
+
+                       Low_Artists     Top_Artists
+     Low_Artists              83              58
+     Top_Artists              28             113
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.76653
+     Top_Artists         0.75304         1.00000
+
+
+Accuracy: 0.695035
+
+
+
+Average accuracy (10 splits): 0.734043
+
+0.6
+
+                       Low_Artists     Top_Artists
+     Low_Artists              77              64
+     Top_Artists              29             112
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.78938
+     Top_Artists         0.72518         1.00000
+
+
+Accuracy: 0.670213
+
+
+
+Average accuracy (10 splits): 0.713475
+
+0.7
+
+                       Low_Artists     Top_Artists
+     Low_Artists              84              57
+     Top_Artists              20             121
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.75055
+     Top_Artists         0.70123         1.00000
+
+
+Accuracy: 0.726950
+
+
+
+Average accuracy (10 splits): 0.723050
+
+0.8
+
+                       Low_Artists     Top_Artists
+     Low_Artists              89              52
+     Top_Artists              31             110
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.71225
+     Top_Artists         0.74181         1.00000
+
+
+Accuracy: 0.705674
+
+
+
+Average accuracy (10 splits): 0.716312
+
+0.9
+
+                       Low_Artists     Top_Artists
+     Low_Artists              86              55
+     Top_Artists              23             118
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.78924
+     Top_Artists         0.73606         1.00000
+
+
+Accuracy: 0.723404
+
+
+
+Average accuracy (10 splits): 0.723404
+
+
+1.0
+
+                       Low_Artists     Top_Artists
+     Low_Artists              82              59
+     Top_Artists              23             118
+
+                       Low_Artists     Top_Artists
+     Low_Artists         1.00000         0.81142
+     Top_Artists         0.72113         1.00000
+
+
+Accuracy: 0.709220
+
+
+
+Average accuracy (10 splits): 0.713121
+
+
+
+
+
+
+
+
+
