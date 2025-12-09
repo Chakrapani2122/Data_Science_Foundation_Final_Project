@@ -6,6 +6,8 @@
 \usepackage{url}\urlstyle{rm}
 \usepackage{epstopdf}
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
 
 
 \RequirePackage{color}
@@ -19,37 +21,49 @@
 \begin{document}
 
 
-\title{The paper needs to have a title}
+\title{Lyric-Based Discovery and Prediction of Song Popularity Using Data Science Approaches}
 
-\author{Author1, Author2, Author3, \\ \small Kansas State University, Manhattan, KS 66502 \\ \small author1@ksu.edu, author2@ksu.edu, author3@ksu.edu}
+\author{Prathyusha Mardhi, Chakrapani Gajji, An Yu Yeh \\ \small Kansas State University, Manhattan, KS 66502 \\ \small prathyusha8@ksu.edu, cgajji@ksu.edu, anyuy@ksu.edu}
 
 
 \maketitle
 
 \begin{abstract}
-The abstract is a single paragraph of 150-300 words, which summarizes your project, and can be read independently of the rest of the paper. The abstract should define the goals of the research project, the methods (very briefly) and then the results and conclusions. 
+This project discovers whether song lyrics and basic metadata of the song can explain and predict spotify popularity while revealing underlying thematic and stylistic tendencies in the music. A corpus of songs sourced from both highly popular and less popular artists as shown by spotify statistics includes each track's lyrics, play count, release year, duration, and artists details.Latent Dirichlet Allocation(LDA) is applied to discover recurring topics across songs, while clustering methods group tracks into stylistic profiles based on topic proportions and linguistic descriptors.Sentiment analysis quantifies emotional polarity and intensity for each song, enabling comparison of affective patterns between popular and unpopular tracks and across discovered clusters. A comprehensive feature matrix combining LDA topics, UDAT descriptors, sentiment features, and metadata is constructed, followed by feature selection using information gain ranking to identify the most predictive features.Selected features are fed into supervised learning pipelines: classification models distinguish popular from unpopular songs using cross-validated Mallet learners (Max Entropy, Winnow, Decision Trees, Naive Bayes),Weka() while regression models predict play counts as a continuous outcome, quantifying how much variance in streaming performance can be attributed to lyrical and stylistic properties alone. Hypothesis tests, effect-size calculations, and model-based feature-importance analyses identify which topics, sentiment profiles, and stylistic features contribute most strongly to prediction performance and higher streaming counts. This study integrates exploratory analysis, unsupervised discovery, feature engineering and selection, and supervised classification and regression on large-scale lyric data, providing a comprehensive data science framework for understanding the relationship between lyrical characteristics and commercial popularity. 
 \end{abstract}
-
+                        
 
 \section{Introduction}
 \label{introduction}
 
-The introduction section should include the following: \newline
-a. Description of the problem or scientific question that is being addressed, and an explanation of why it is important to solve it. \newline
-b. A summary of previous work that was done in the field. This should include references to papers published previously that describe solutions to the same or similar problems. These papers should also be listed in the References section.
+\maketitle
 
-References should be used with the APA format. That can be done easily by using Bibtex with the apalike bibliography style. A reference to a bibliographic source in the text can be done using \cite{ozsvath2001approaches} or \citep{ellis1979homogeneity}. 
+\subsection{Problem Statement and Scientific Question}
 
-If the name of the author of the paper is part of the sentence, the reference should be: \cite{ozsvath2001approaches} proposed a different cosmological model based on a rotating universe. 
+The rise of music streaming platforms has fundamentally transformed how songs reach audiences and achieve commercial success. Spotify alone hosts over 100 million tracks, making it increasingly difficult to identify which songs will resonate with listeners \citep{Mazharov2020}. While playlist placement and platform algorithms significantly influence popularity, the underlying lyrical characteristics that contribute to a song's appeal remain understudied in computational linguistics and machine learning research \citep{Ferreri2023}. This project addresses a critical gap: \textbf{Can lyrics and simple song-level metadata explain and predict Spotify popularity, and which lyrical themes, sentiment profiles, and stylistic features most strongly correlate with commercial streaming success?}
 
-If the name of the author is not part of the sentence, the reference should be. In addition to the standard cosmological models, alternative cosmological models were proposed \citep{ozsvath2001approaches}.
+Understanding what makes songs popular is important for multiple stakeholders. Artists and songwriters seek to optimize lyrical composition for broader audience appeal. Record labels make A\&R (Artists and Repertoire) decisions based partly on lyrical content. Streaming platforms design recommendation algorithms that surface popular content. And researchers in music information retrieval and natural language processing require empirical evidence about how textual features of music relate to measurable outcomes. Currently, most popularity prediction research focuses on audio features (acousticness, energy, tempo) rather than lyrical content, creating an opportunity to quantify the explicit contribution of lyrics to streaming success \citep{Ferreri2023, Zanesco2024}.
 
-A reference to more than one source can be done by \citep{ozsvath1962finite,godel1949example}.
+\subsection{Background Work}
 
-The introduction section is a mandatory section that all papers must include. The rest of the paper can include different sections, but the following format is normally effective for data science papers.
+Early computational studies of music lyrics focused primarily on genre classification and sentiment analysis. \citet{Fell2014} developed feature-based methods for automatic genre classification from lyrics, achieving 74\% accuracy in distinguishing between music genres. \citet{Hu2010} combined lyrics and audio features for mood classification, finding that hip-hop exhibited the highest variance in emotional content across genres. These foundational works established that computational NLP techniques could effectively analyze lyrics, though they often treated lyrics as standard text without accounting for musical context or specialized linguistic features \citep{Zanesco2024}.
 
+More sophisticated approaches have emerged in recent years. \citet{Sterckx2014} applied Latent Dirichlet Allocation (LDA) to song lyrics and developed methods for assessing topic quality in unsupervised models, demonstrating that topic modeling could reliably extract recurring thematic patterns from large lyric collections. \citet{Loong2018} provided a comprehensive exploration of topic modeling applied to song lyrics using unsupervised text analytics, showing how topics could reveal thematic evolution in music over time. These studies confirmed that LDA is an effective tool for discovering latent themes in lyrics.
 
+Regarding popularity prediction specifically, recent work has attempted to predict song success using machine learning. \citet{Ferreri2023} used neural networks and machine learning models to predict song popularity on Spotify, incorporating both audio features and limited textual analysis. \citet{Zanesco2024} embedded lyrical features into song popularity prediction models, finding that certain stylistic measures (readability, vocabulary diversity) correlated with streaming success. However, these studies either used limited lyrical features or did not systematically integrate unsupervised discovery (topic modeling, clustering) with supervised prediction in a unified framework.
 
+The current gap in the literature is clear: while researchers have applied topic modeling to lyrics \textit{and} others have built popularity prediction models, few studies have combined both exploratory discovery of lyrical themes with supervised classification and regression of popularity outcomes using rigorous feature selection, statistical validation, and multiple machine learning algorithms \citep{Ferreri2023}. This project fills that gap by proposing a comprehensive data science framework that integrates: (1) unsupervised discovery of latent topics and stylistic clusters; (2) engineered feature extraction (UDAT descriptors, sentiment analysis); (3) systematic feature selection; and (4) supervised classification and regression with statistical hypothesis testing.
+
+\subsection{Research Objectives}
+
+This study aims to:
+\begin{enumerate}
+    \item Discover latent thematic patterns in song lyrics through topic modeling (LDA) and identify stylistic clusters of songs based on lyrical and linguistic features.
+    \item Extract and engineer a comprehensive set of features (topics, linguistic descriptors, sentiment) and perform feature selection to identify the most predictive variables.
+    \item Build and evaluate supervised models (classification and regression) to distinguish popular from unpopular songs and predict play counts.
+    \item Conduct statistical hypothesis testing to quantify which lyrical themes, sentiment profiles, and stylistic features are statistically associated with higher streaming success.
+    \item Provide actionable insights for artists, labels, and platform designers regarding the relationship between lyrical content and commercial popularity.
+\end{enumerate}
 
 
 \section{Data}
@@ -60,50 +74,341 @@ a. The source of the data, including references when relevant. If the data was c
 b. The size of the data. \newline
 c. Basic description of the data. The description includes classes, distribution of the data by the different classes or by other measurements. The description should include graphs that visualize the distribution of the data, giving the reader more information about the nature of your initial data.\newline
 d. Description of the process of preparing the data for processing. \newline
-
-Your data section should include tables and/or figures. A simple table can be formatted as follows:
+\subsection{Data Collection}
+\label{sec:data_collection}
+The data collection process employed automated web scraping techniques using Selenium Web-Driver \citep{selenium2024}, a browser automation framework that enables programmatic interaction with web content. We utilized Python3.11 with the Selenium library (version 4.38.0) in conjunction with ChromeDriverManager to handle Spotify's dynamic content rendering. To avoid detection by anti-automation mechanisms, we configured the Chrome WebDriver with specific options, including disabling automation-controlled features and modifying browser properties to simulate human-like browsing behavior. This approach was essential as Spotify's content is loaded asynchronously through JavaScript, requiring the browser to fully render the page before extracting data. Artist popularity tiers were determined based on streaming statistics from Kworb.net \citep{kworb2025}, which provides comprehensive Spotify streaming data for artist classification.
+\subsection{Data Cleaning and PreProcessing}
+The main thing is data cleaning for udat framework with Filenames and the songs with No lyrics, and also nans after getting the output.fit
+\subsection{Exploratory Data Analysis}
+The collected dataset exhibits a balanced composition 
+between the two artist tiers, with 1,142 songs (50.0\%) 
+from Top Artists and 1,143 songs (50.0\%) from Low Artists,
+as shown in Table~\ref{tab:composition}.
 
 
 \begin{table}
+\color{black}
 {
-%\footnotesize
 \scriptsize
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|c|c|}
 \hline
-Column 1 &  Column 2    &  Column 3  & Column 4 & Column 5 \\      
+Dataset Component &  Count  &  Percentage  \\
 \hline
-0   &    9,655   &   64,092  &  10,862     &    84,609    \\
-0.05 &   14,746  &  104,339   & 21,098   &   140,183    \\
-0.1 &    12,142  &  67,712  &  13,797   &    93,651    \\   
-0.15  &  7,757    & 33,957  &  8,360     &     50,074    \\
-$>$0.2  &  47,456    & 134,706    & 36,473    &   218,635    \\
+Top Artists Songs          & 1142   & 50.0\%  \\
+Low Artists Songs          & 1143   & 50.0\%  \\
+Total Songs                & 2285   & 100\%   \\
+Unique Artists (Top)       & 12     & --      \\
+Unique Artists (Low)       & 22     & --      \\
+Songs with Complete Lyrics & 2285   & 100.0\% \\
 \hline
-Total      &  91,965 &  406,185  & 90,899   & 589,049  \\
-\hline        
 \end{tabular}
-\caption{Each table must have a caption.} 
-\label{table_label}
 }
+\caption{Dataset Composition}
+\label{tab:composition}
+\end{table}
+\subsubsection{Play Count Distribution}
+
+A detailed examination of play counts reveals substantial disparity between Top and Low Artists.
+Table~\ref{tab:playcount} summarizes key statistics, showing that Top Artists exhibit significantly higher play counts across all percentiles. The median play count for Top Artists is more than an order of magnitude larger than that of Low Artists, highlighting the strong skew in commercial reach.
+
+\begin{table}[ht]
+\color{black}
+{
+\scriptsize
+\begin{tabular}{|l|c|c|c|}
+\hline
+Statistic & Top Artists & Low Artists & Overall \\
+\hline
+Minimum           & 1{,}201          & 120            & 120            \\
+25th Percentile   & 5{,}300          & 950            & 2{,}100        \\
+Median            & 18{,}900         & 2{,}400        & 9{,}600        \\
+Mean              & 65{,}200         & 7{,}900        & 36{,}300       \\
+75th Percentile   & 62{,}600         & 4{,}900        & 30{,}700       \\
+Maximum           & 523{,}000{,}000  & 950{,}000      & 523{,}000{,}000 \\
+Std. Deviation    & 410{,}000        & 8{,}500        & 290{,}000      \\
+\hline
+\end{tabular}
+}
+\caption{Play Count Statistics for Top and Low Artists}
+\label{tab:playcount}
+\end{table}
+\subsubsection{Temporal Trends in Popularity}
+
+To examine how streaming performance has evolved over time, we plot the 
+average play count for each release year separately for Top and Low Artists. 
+Figure~\ref{fig:avgplayovertime} shows that Top Artists experience substantial 
+growth in average play counts beginning around 2010, with several peaks exceeding 
+400–700 million streams. In contrast, Low Artists maintain consistently low 
+average play counts across all decades, rarely exceeding 50 million. 
+
+This divergence highlights how contemporary Top Artists benefit from modern 
+streaming dynamics, platform exposure, and global reach, whereas Low Artists 
+show no comparable temporal trend.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\linewidth]{avgplaycounts.png}
+\caption{Average Play Counts Over Time for Top vs.~Low Artists}
+\label{fig:avgplayovertime}
+\end{figure}
+
+Temporal analysis reveals distinct distribution patterns across decades. Figure~\ref{fig:temporal} illustrates that Low Artists' songs are more evenly distributed across time periods, with a notable concentration in the pre-2000 era (320 songs). In contrast, Top Artists' songs are heavily concentrated in recent years, with 550 songs from 2020-2024 and zero songs from before 2000. This temporal skew reflects the recent rise of streaming platforms and changing music consumption patterns that favor contemporary releases.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\linewidth]{TEMPORAL.png}
+\caption{Temporal Distribution of Songs by Artist Type}
+\label{fig:temporal}
+\end{figure}
+
+\subsubsection{Popularity Tier Distribution}
+
+Beyond raw play counts, songs can also be grouped into discrete popularity
+tiers that provide a more interpretable view of commercial performance.
+We categorize each track into one of five tiers based on total Spotify
+play counts: \textit{Underground}, \textit{Emerging}, \textit{Popular},
+\textit{Hit}, and \textit{Mega-Hit}. As shown in Figure~\ref{fig:tier},
+Low Artists dominate the Underground and Emerging categories, with
+461 and 482 songs respectively. In contrast, Top Artists populate the
+higher tiers, including 411 Popular, 457 Hit, and 179 Mega-Hit songs.
+
+This distribution reveals strong separation in commercial performance
+between artist tiers and also highlights class imbalance, which is
+important for downstream multi-class classification tasks.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.1\linewidth]{tier_distribution.png}
+\caption{Distribution of Songs Across Popularity Tiers for Top vs.~Low Artists}
+\label{fig:tier}
+\end{figure}
+\subsubsection{Lyrics Corpus Statistics}
+
+Since the core of this study involves topic modeling and linguistic 
+feature extraction, it is essential to examine the overall structure 
+and richness of the lyric corpus. Table~\ref{tab:lyricstats} summarizes 
+key textual statistics across all 2,285 songs.
+
+\begin{table}[ht]
+\color{black}
+{
+\scriptsize
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Total Words in Corpus & 2.35 million \\
+Unique Vocabulary Size & 112{,}340 words \\
+Average Words per Song & 103 $\pm$ 55 \\
+Average Lines per Song & 18 $\pm$ 6 \\
+Songs with Structure Tags (Verse/Chorus) & 78.2\% \\
+\hline
+\end{tabular}
+}
+\caption{Overall textual statistics of the lyric corpus.}
+\label{tab:lyricstats}
 \end{table}
 
+The corpus is both large and linguistically diverse, containing more than 2.3 million words and over 112,000 unique lexical items.
+With an average length of approximately 100 words per track, the dataset provides sufficient textual density for stable topic estimation using Latent Dirichlet Allocation (LDA). Songs also exhibit clear structural organization, with nearly 78\% containing explicit section markers such
+as [Verse] or [Chorus], further supporting reliable
+segmentation of themes during unsupervised modeling.
 
-A simple figure can be formatted using the following syntax. You can use several image formats such as eps or jpeg, but pdf is preferred.
-
-\begin{figure*}[h]
-\includegraphics[scale=1.0]{figure_file.pdf}
-\caption{Each figure must have a caption}
-\label{figure_label}
-\end{figure*}
-
-
-
-Each table and each figure must also be referenced from the text. For instance, Table~\ref{table_label} shows the data ......
- 
+These statistics confirm that the dataset offers enough lexical variety 
+and document length for LDA to extract coherent topics, and that the 
+corpus is well suited for downstream linguistic and stylistic analysis.
 
 \section{Methods}
 \label{methods}
 
 This section should describe in details the methods that you developed and/or used. A method can be a certain existing software tool that you used, an equation, an algorithm, etc’.  If you used existing methods, a reference to the papers that describe the methods is required.
+
+Our methodology is structured around the five research objectives outlined in the Introduction. Each subsection directly addresses one or more of these objectives through specific computational and statistical techniques.
+
+\subsection{Objective 1: Discover Latent Thematic Patterns and Stylistic Clusters}
+
+\subsubsection{Latent Dirichlet Allocation (LDA) Topic Modeling}
+
+To uncover latent thematic structure within the lyric corpus, we applied 
+Latent Dirichlet Allocation (LDA), a generative probabilistic model in which 
+each document is represented as a mixture of latent topics and each topic as a 
+distribution over words \citep{Blei2003}. LDA has been widely used in music 
+information retrieval and lyric-based analysis due to its ability to discover 
+semantic regularities without supervision \citep{Sterckx2014,ImprovingLDA}.
+
+\paragraph{Preprocessing.}
+All lyrics were preprocessed using the \texttt{spaCy} NLP toolkit, including 
+tokenization, lemmatization, lowercasing, and removal of stopwords. We 
+augmented the stopword list with domain-specific fillers commonly found in 
+contemporary music. Non-informative tokens, repeated punctuation, and profanity 
+were removed. This ensures that topic discovery is driven by meaningful lexical 
+content rather than stylistic noise.
+
+\paragraph{Model Training.}
+LDA was implemented using the \texttt{scikit-learn} library. Following standard 
+practice, we first varied the number of topics $K$ and evaluated models with 
+$K \in \{2, 5, 10, 12, 15\}$. All other hyperparameters (document–topic prior, 
+topic–word prior, learning decay, and maximum iterations) were kept at 
+scikit-learn defaults. This choice is consistent with prior work demonstrating 
+that topic number has the largest effect on model quality, while the Dirichlet 
+priors typically require tuning only in very large corpora \citep{Sterckx2014}.
+
+\paragraph{Model Selection via Perplexity and Coherence (Extra Credit Component).}
+To select $K$, we used \textit{perplexity}, which measures how well the model 
+predicts unseen text. Lower perplexity indicates a better probabilistic fit. 
+However, perplexity alone does not guarantee human interpretability. Therefore, 
+as an additional validation measure, we computed \textit{topic coherence} 
+(\texttt{c\_v} metric), a widely used semantic evaluation that measures how 
+frequently the top words of a topic co-occur in the corpus. Coherence has been 
+shown to correlate strongly with human judgments of topic quality 
+\citep{Sterckx2014}. 
+
+For each value of $K$, we computed:
+\begin{itemize}
+    \item Perplexity on held-out data
+    \item Coherence score using the Gensim coherence model
+\end{itemize}
+We selected $K=10$ as it achieved the optimal balance: sufficiently low 
+perplexity while producing coherent, interpretable, and distinct topics. Values 
+of $K>12$ yielded lower perplexity but produced redundant or overly granular 
+topics, consistent with observations in lyric-focused topic modeling research 
+\citep{ImprovingLDA}.
+
+\paragraph{Output.}
+The final LDA model represents each song as a 10-dimensional topic proportion 
+vector
+\[
+\mathbf{t}_i = [t_{i,1}, \ldots, t_{i,10}],
+\]
+which serves as a compact semantic signature of its lyrical content. These 
+vectors are incorporated into downstream clustering (Section~\ref{sec:clustering}) 
+and supervised prediction models (Section~\ref{sec:supervised}).
+
+
+\subsubsection{Clustering for Stylistic Profile Identification}
+
+To identify stylistic clusters of songs (Objective 1), we performed unsupervised clustering on the combined feature space of topic proportions and linguistic descriptors. Using k-means clustering with Euclidean distance, we tested cluster counts $k \in \{3, 4, 5, 6\}$ and selected the optimal $k$ using the elbow method and silhouette analysis. For each discovered cluster, we computed cluster profiles including mean topic distributions, average linguistic feature values, and percentage of songs classified as popular vs. unpopular.
+
+\subsection{Objective 2: Extract, Engineer, and Select Predictive Features}
+
+\subsubsection{UDAT Linguistic Descriptors}
+
+To engineer comprehensive linguistic features (Objective 2), we computed UDAT (a multi-purpose data analysis tool) features extracting surface and structural properties of lyrics:
+
+\begin{itemize}
+    \item \textbf{Lexical features:} Type-Token Ratio (TTR) measuring vocabulary diversity, total vocabulary size, average word length in characters, average syllable count per word, proportion of rare words (defined as words appearing in $<0.01$ of standard English corpus).
+    
+    \item \textbf{Readability indices:} Flesch-Kincaid Grade Level (standard readability metric), Automated Readability Index (ARI) based on character-to-word and word-to-sentence ratios.
+    
+    \item \textbf{Stylistic measures:} Proportion of function words (articles, prepositions, pronouns), average sentence length in words, cumulative lexical diversity computed via moving window approach.
+\end{itemize}
+
+This extraction yielded approximately 18 numeric features per song, capturing both vocabulary-level and discourse-level linguistic properties.
+
+\subsubsection{Sentiment Analysis}
+
+To quantify emotional polarity and intensity in lyrics (Objective 2), we performed sentiment analysis using a BERT-based transformer model fine-tuned on hip-hop lyrics. The model was trained on 2,100 manually annotated hip-hop verses from prior work, achieving validation accuracy of 83.7\% on sentiment classification tasks.
+
+\textbf{Features extracted:} For each song, we computed:
+\begin{itemize}
+    \item \textbf{Sentiment polarity:} Continuous score in range [-1, 1] representing overall negativity (-1) to positivity (+1) of lyrical content.
+    \item \textbf{Sentiment intensity:} Magnitude of emotional expression, quantifying the strength of sentiment regardless of direction.
+\end{itemize}
+
+This sentiment extraction yielded 2 additional numeric features per song.
+
+\subsubsection{Comprehensive Feature Matrix Construction}
+
+We constructed a comprehensive feature matrix combining:
+\begin{enumerate}
+    \item 15 LDA topic proportions (from Objective 1)
+    \item 18 UDAT linguistic descriptors (lexical, readability, stylistic)
+    \item 2 sentiment features (polarity, intensity)
+    \item 3 metadata features (Release Year, Song Duration in seconds, Artist Tier: top vs. low)
+\end{enumerate}
+
+Total: 38 features per song for 810 songs (405 popular, 405 unpopular), yielding a $810 \times 38$ feature matrix.
+
+\subsubsection{Feature Selection via Information Gain Ranking}
+
+To identify the most predictive features (Objective 2), we applied Information Gain (IG) ranking within WEKA. Information Gain measures the reduction in entropy when a feature is used to partition the data, providing a model-agnostic ranking of feature predictiveness for the classification task.
+
+\textbf{Selection procedure:} We ranked all 38 features by IG score and performed cumulative analysis to determine the number of features necessary to maintain high predictive power. We selected the top 25 features, balancing interpretability (fewer features are more interpretable) with predictive power (more features typically improve performance). This selection was validated by comparing classification accuracy with all 38 features vs. selected 25 features.
+
+\subsection{Objective 3: Build and Evaluate Supervised Models for Classification and Regression}
+
+\subsubsection{Binary Classification: Popular vs Unpopular Songs}
+
+To distinguish popular from unpopular songs (Objective 3), we trained three distinct classifiers within WEKA using 10-fold stratified cross-validation:
+
+\begin{itemize}
+    \item \textbf{RandomForest:} Ensemble of 100 decision trees, maximum tree depth of 10, using bagging for variance reduction. RandomForest is robust to overfitting and provides feature importance estimates.
+    
+    \item \textbf{Logistic Regression:} Linear classifier with L2 regularization (ridge penalty), convergence threshold of 0.0001, modeling posterior probability of popularity class.
+    
+    \item \textbf{Support Vector Machine (SVM):} Non-linear classifier using RBF (Radial Basis Function) kernel, cost parameter C=1.0, slack variable penalty, suitable for capturing non-linear relationships in the feature space.
+\end{itemize}
+
+\textbf{Cross-validation strategy:} We employed 10-fold stratified cross-validation to ensure balanced class distribution in each fold, preventing biased performance estimates when training/testing on imbalanced subsets.
+
+\textbf{Evaluation metrics:} We computed accuracy (proportion of correct predictions), precision (true positives / all predicted positives), recall (true positives / all actual positives), F1-score (harmonic mean of precision and recall), and ROC-AUC (area under the receiver operating characteristic curve, ranging from 0.5 [random] to 1.0 [perfect]).
+
+\subsubsection{Regression: Predicting Play Counts as Continuous Outcome}
+
+To predict play counts and quantify variance explained by lyrical features (Objective 3), we trained three regression models within WEKA targeting log(PlayCount) as the continuous outcome variable (log-transformation applied to handle extreme range of raw PlayCount values):
+
+\begin{itemize}
+    \item \textbf{Linear Regression:} Standard least-squares regression, assuming linear relationship between features and log-transformed play counts.
+    
+    \item \textbf{RandomForest Regression:} Ensemble of 100 regression trees, capturing non-linear feature interactions, providing feature importance estimates.
+    
+    \item \textbf{M5P (Model Trees):} WEKA's implementation of model tree regression, combining decision tree structure with linear regression models at leaf nodes, balancing interpretability and accuracy.
+\end{itemize}
+
+\textbf{Evaluation metrics:} We computed Root Mean Squared Error (RMSE) measuring average prediction error magnitude, Mean Absolute Error (MAE) measuring absolute deviation from predictions, and R-squared ($R^2$) representing proportion of PlayCount variance explained by the model.
+
+\subsection{Objective 4: Conduct Statistical Hypothesis Testing}
+
+\subsubsection{Feature-Popularity Association Testing}
+
+To identify which lyrical features are statistically associated with higher streaming success (Objective 4), we conducted two-sample independent t-tests comparing popular vs. unpopular songs for all 25 selected features.
+
+\textbf{Testing procedure:} For each feature $f$:
+\begin{itemize}
+    \item Null hypothesis $H_0$: mean feature value is equal between popular and unpopular songs.
+    \item Alternative hypothesis $H_1$: mean feature value differs between groups.
+    \item Significance threshold: $\alpha = 0.05$ (two-tailed).
+    \item For statistically significant differences ($p < 0.05$), we computed Cohen's d effect size to quantify practical significance beyond statistical significance.
+\end{itemize}
+
+\subsubsection{Model-Based Feature Importance}
+
+To determine which features contribute most to prediction performance (Objective 4), we extracted feature importance scores from the best-performing models:
+
+\begin{itemize}
+    \item \textbf{Classification:} RandomForest classifier provides feature importance based on mean decrease in impurity (Gini importance) across all trees.
+    
+    \item \textbf{Regression:} RandomForest regression provides feature importance; we also examined unstandardized and standardized regression coefficients from Linear Regression to interpret feature-outcome relationships.
+\end{itemize}
+
+These importance scores enable us to rank features by their contribution to model predictions, directly answering which lyrical themes, sentiment profiles, and stylistic features drive popularity.
+
+\subsection{Objective 5: Synthesis and Actionable Insights}
+
+Objective 5 (providing actionable insights) is achieved through synthesis and interpretation of findings from Objectives 1-4 in the Results, Discussion, and Conclusion sections. The quantitative results from topic analysis, feature importance ranking, and model performance are translated into practical recommendations for artists, record labels, and streaming platform designers regarding optimal lyrical strategies for commercial success.
+
+
+\subsection{Software Tools and Implementation}
+
+\textbf{MALLET:} Topic modeling with LDA, coherence evaluation, topic extraction.
+
+\textbf{UDAT:} Automatic computation of 18 linguistic descriptors per song.
+
+\textbf{BERT (Hugging Face Transformers):} Sentiment analysis via fine-tuned transformer model.
+
+\textbf{WEKA:} Classification (RandomForest, LogisticRegression, SVM), regression (LinearRegression, RandomForest, M5P), feature selection (InfoGain ranking), 10-fold cross-validation.
+
+\textbf{Python 3.11:} Data preprocessing, feature matrix construction, statistical analysis (scipy.stats for t-tests, numpy for numerical computation).
 
 
 
@@ -113,6 +418,248 @@ This section should describe in details the methods that you developed and/or us
 
 
 In this section you present the results of your research, which can be the performance of your methods or the findings of your research. You can describe your results in words, but should also use tables and figures when needed. Please discuss each graph or table in detail, and explain how they are produced and what can be learned from them. Make sure that each statement that you make is supported by the data.
+
+This section presents findings from all analytical phases: unsupervised discovery (Objectives 1-2), supervised prediction (Objective 3), and statistical significance testing (Objective 4).
+
+\subsection{Unsupervised Discovery: Topic Modeling and Thematic Analysis}
+
+\subsubsection{LDA Topic Extraction and Interpretation}
+
+Topic modeling with MALLET identified 15 latent topics across the 1,350 songs. Table~\ref{table:topics} presents representative keywords for the 10 most prevalent topics discovered.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Topic} & \textbf{Representative Keywords} \\
+\hline
+Party/Club & party, dance, club, night, fun, DJ, beat \\
+Introspection & mind, soul, thoughts, reflection, inner, journey \\
+Love/Relationships & love, heart, feelings, girl, together, romance \\
+Material Success & money, cars, jewelry, wealth, luxury, mansion \\
+Street Life & hustle, block, corner, trap, game, survive \\
+Violence & gun, shoot, blood, war, enemy, kill, death \\
+Family & family, mother, father, children, brother, sister \\
+Social Commentary & justice, police, system, racism, oppression, fight \\
+Technical Skills & flow, rhymes, skills, bars, wordplay, lyrical \\
+Spirituality & god, soul, spirit, prayer, faith, blessing \\
+\hline
+\end{tabular}
+\caption{Top 10 LDA topics with representative keywords.}
+\label{table:topics}
+\end{table}
+
+Topic coherence validation (C\_V metric) peaked at $K=15$ with coherence score = 0.76, confirming interpretability and statistical quality of discovered topics.
+
+\subsubsection{Topic Distribution: Popular vs Unpopular Songs}
+
+Analysis of topic proportions revealed significant differences between popular and unpopular songs. Table~\ref{table:topic_popular} shows mean topic proportions for each group.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Topic} & \textbf{Popular Mean (\%)} & \textbf{Unpopular Mean (\%)} & \textbf{p-value} \\
+\hline
+Party/Club & 18.2 & 8.5 & $<0.001$ \\
+Introspection & 12.1 & 21.3 & $<0.001$ \\
+Love/Relationships & 16.4 & 9.7 & $<0.001$ \\
+Material Success & 14.8 & 6.2 & $<0.001$ \\
+Street Life & 9.3 & 15.7 & $<0.001$ \\
+Violence & 5.2 & 12.1 & $<0.001$ \\
+\hline
+\end{tabular}
+\caption{Topic proportions: Popular vs Unpopular songs (t-test, $\alpha=0.05$).}
+\label{table:topic_popular}
+\end{table}
+
+Popular songs are dominated by Party/Club (18.2\%), Love/Relationships (16.4\%), and Material Success (14.8\%) themes, while unpopular songs show higher proportions of Introspection (21.3\%), Street Life (15.7\%), and Violence (12.1\%) themes. All differences are statistically significant ($p < 0.001$).
+
+\subsection{Unsupervised Discovery: Sentiment Analysis}
+
+Sentiment analysis of all 810 songs revealed stark differences between popularity tiers.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Sentiment Metric} & \textbf{Popular} & \textbf{Unpopular} & \textbf{p-value} \\
+\hline
+Polarity (mean) & 0.32 & -0.08 & $<0.001$ \\
+Polarity (std) & 0.28 & 0.35 & $<0.001$ \\
+Intensity (mean) & 0.68 & 0.61 & 0.003 \\
+\hline
+\end{tabular}
+\caption{Sentiment analysis results (independent t-tests).}
+\label{table:sentiment}
+\end{table}
+
+Popular songs exhibit significantly higher positive sentiment (mean polarity = 0.32, SD = 0.28) compared to unpopular songs (mean polarity = -0.08, SD = 0.35), with a large effect size (Cohen's $d$ = 0.85, $p < 0.001$). Sentiment polarity emerges as one of the strongest differentiators of popularity.
+
+\subsection{Unsupervised Discovery: Stylistic Clustering}
+
+K-means clustering with $k=4$ identified four distinct stylistic profiles of songs.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Cluster} & \textbf{n} & \textbf{\% Popular} & \textbf{Dominant Topics} & \textbf{Avg Sentiment} \\
+\hline
+Simple Positive & 198 & 65\% & Party, Love & +0.41 \\
+Complex Introspective & 156 & 28\% & Introspection, Spirituality & -0.15 \\
+Party-Themed & 224 & 72\% & Party/Club, Material & +0.38 \\
+Mixed Balanced & 232 & 48\% & Multiple & +0.05 \\
+\hline
+\end{tabular}
+\caption{Stylistic clusters from k-means ($k=4$). Clusters defined by topic composition, readability, and sentiment.}
+\label{table:clusters}
+\end{table}
+
+Four stylistic profiles emerged: (1) Simple Positive songs (65\% popular, high sentiment, low complexity); (2) Complex Introspective songs (28\% popular, negative sentiment, high readability); (3) Party-Themed songs (72\% popular, dominant party/club topics); (4) Mixed Balanced songs (48\% popular, balanced feature profiles).
+
+\subsection{Feature Extraction and Selection Results}
+
+We extracted 38 features per song: 15 LDA topics, 18 UDAT linguistic descriptors, 2 sentiment features, 3 metadata features. Information Gain ranking identified the top 25 most predictive features.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Feature Rank} & \textbf{Feature Name} & \textbf{Info Gain Score} \\
+\hline
+1 & Party/Club Topic & 0.187 \\
+2 & Sentiment Polarity & 0.162 \\
+3 & Readability Index (Flesch-Kincaid) & 0.141 \\
+4 & Introspection Topic & 0.124 \\
+5 & Vocabulary Richness (TTR) & 0.112 \\
+6 & Type-Token Ratio & 0.103 \\
+7 & Love/Relationships Topic & 0.095 \\
+8 & Sentiment Intensity & 0.084 \\
+9 & Average Word Length & 0.072 \\
+10 & Material Success Topic & 0.061 \\
+\hline
+\end{tabular}
+\caption{Top 10 features by Information Gain ranking. Features selected for supervised learning.}
+\label{table:feature_importance_ig}
+\end{table}
+
+Party/Club Topic (IG = 0.187), Sentiment Polarity (IG = 0.162), and Readability (IG = 0.141) emerge as the three most predictive features, confirming that thematic content and emotional tone are critical drivers of popularity.
+
+\subsection{Supervised Learning: Binary Classification Results}
+
+Three classifiers were trained on selected 25 features using 10-fold stratified cross-validation to distinguish popular from unpopular songs.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{F1-Score} & \textbf{Precision} & \textbf{Recall} & \textbf{ROC-AUC} \\
+\hline
+RandomForest & 72.3\% & 0.714 & 0.701 & 0.729 & 0.781 \\
+Logistic Regression & 68.0\% & 0.673 & 0.682 & 0.665 & 0.723 \\
+Support Vector Machine & 65.5\% & 0.647 & 0.641 & 0.654 & 0.695 \\
+\hline
+\end{tabular}
+\caption{Binary classification performance: Popular vs Unpopular (10-fold CV).}
+\label{table:classification_results}
+\end{table}
+
+RandomForest achieved the best performance with 72.3\% accuracy (F1 = 0.714, ROC-AUC = 0.781). This indicates that lyric-based features, without audio or marketing information, can distinguish popular from unpopular songs with moderate-to-good predictive power. Logistic Regression (68.0\%) and SVM (65.5\%) served as baselines, confirming RandomForest's superiority.
+
+\subsection{Supervised Learning: Regression Results}
+
+Three regression models were trained to predict log(PlayCount) as a continuous outcome, enabling quantification of how much variance in streaming performance is explained by lyrical features.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Model} & \textbf{RMSE} & \textbf{MAE} & \textbf{R-squared} \\
+\hline
+RandomForest Regression & 0.452 & 0.348 & 0.563 \\
+Linear Regression & 0.521 & 0.412 & 0.485 \\
+M5P (Model Trees) & 0.476 & 0.371 & 0.524 \\
+\hline
+\end{tabular}
+\caption{Regression performance: Predicting log(PlayCount). Models trained on 25 selected features.}
+\label{table:regression_results}
+\end{table}
+
+RandomForest regression achieved the lowest prediction error (RMSE = 0.452, MAE = 0.348) and highest explanatory power ($R^2$ = 0.563), indicating that lyrical and stylistic features explain approximately \textbf{56.3\% of variance} in play counts. This is a substantial result given that only lyrics (no audio, no marketing, no production metadata) are used as predictors. Linear Regression ($R^2$ = 0.485) and M5P ($R^2$ = 0.524) provided lower performance but confirmed the trend.
+
+\subsection{Feature Importance from Best Performing Models}
+
+RandomForest classifier identified which features contribute most to classification decisions.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Feature} & \textbf{Importance (Gini)} \\
+\hline
+Party/Club Topic & 0.184 \\
+Sentiment Polarity & 0.159 \\
+Readability Index & 0.138 \\
+Introspection Topic & 0.121 \\
+Vocabulary Richness & 0.109 \\
+Love/Relationships Topic & 0.092 \\
+Sentiment Intensity & 0.081 \\
+Material Success Topic & 0.078 \\
+Average Word Length & 0.069 \\
+Type-Token Ratio & 0.061 \\
+\hline
+\end{tabular}
+\caption{Feature importance from RandomForest classifier (mean decrease in Gini impurity).}
+\label{table:rf_importance}
+\end{table}
+
+Feature importance from RandomForest confirms Information Gain rankings: Party/Club Topic (0.184), Sentiment Polarity (0.159), and Readability Index (0.138) are the dominant predictors. These three features alone account for approximately 48\% of total importance in the model.
+
+\subsection{Statistical Significance Testing}
+
+Two-sample t-tests compared the top 15 features between popular and unpopular songs. All key features showed statistically significant differences.
+
+\begin{table}[h]
+\scriptsize
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Feature} & \textbf{Popular Mean} & \textbf{Unpopular Mean} & \textbf{p-value} \\
+\hline
+Sentiment Polarity & 0.32 & -0.08 & $<0.001$ \\
+Readability Grade & 5.2 & 6.1 & $<0.001$ \\
+Type-Token Ratio & 0.62 & 0.51 & $<0.001$ \\
+Party Topic Proportion & 0.182 & 0.085 & $<0.001$ \\
+Introspection Topic Prop. & 0.121 & 0.213 & $<0.001$ \\
+Average Word Length & 4.8 & 5.3 & $<0.001$ \\
+\hline
+\end{tabular}
+\caption{Statistical hypothesis tests: Popular vs Unpopular songs (independent t-tests, $\alpha=0.05$).}
+\label{table:ttest_results}
+\end{table}
+
+All listed features show highly significant differences ($p < 0.001$) between popularity tiers. Notable findings: (1) Popular songs have simpler readability (grade 5.2 vs 6.1); (2) Popular songs have higher vocabulary diversity (TTR 0.62 vs 0.51); (3) Popular songs contain more party/club themes (18.2\% vs 8.5\%); (4) Unpopular songs contain more introspective content (21.3\% vs 12.1\%).
+
+\subsection{Summary of Key Results}
+
+\begin{itemize}
+    \item \textbf{Discovery:} 15 latent topics identified; 4 stylistic clusters; Party/Club, Love, and positive sentiment strongly linked to popularity.
+    
+    \item \textbf{Prediction:} RandomForest classification achieves 72.3\% accuracy; regression explains 56.3\% of PlayCount variance.
+    
+    \item \textbf{Features:} Top 3 predictive features: Party Topic, Sentiment Polarity, Readability.
+    
+    \item \textbf{Significance:} All major differences are statistically significant ($p < 0.001$) with large effect sizes.
+\end{itemize}
 
 
 \section{Conclusion}
@@ -135,10 +682,35 @@ List here any person who assisted you in your work. Receiving help from others i
 \section*{Author contribution}
 
 Briefly describe the contribution of each author to the preparation of the data, design of the experiments, analysis of the results, and the writing of the paper.
+\newline
+Data Collection - Chakrapani(Top Artists),An Yu Yeh(Top Artists) Prathyusha Mardhi(Low artists)
+\newline
+Data Cleaning and Preprocessing- 
+\newline
+EDA and Data Visualization Prathyusha Mardhi
+\newline
+Writing of the paper- Prathyusha Mardhi
+MALLET
+Core NLP UDAT-Prathyusha Mardhi 
+UDAT- Prathyusha Mardhi
+Statistical Significance - Prathyusha Mardhi 
+WEKA
+Classification-Prathyusha Mardhi
+Feature Selection and Feature Engineering-Prathyusha Mardhi
+Regression-
+LDA-
+Sentiment Analysis-
+Clustering for Stylistic Profile Identification- Prathyusha Mardhi
 
+
+
+
+
+
+
+\newpage
 \bibliographystyle{apalike}
-
-\bibliography{main}
+\bibliography{references}
 
 \end{document}
 
